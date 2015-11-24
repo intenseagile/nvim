@@ -22,3 +22,13 @@ autocmd Filetype python setlocal shiftwidth=4 softtabstop=4
 
 set number
 
+function ReplaceNERDTreeIfDirectory()
+    if argc() == 1 && isdirectory(argv(0))
+        enew
+        NERDTree
+    end
+endfunction
+
+augroup NERDTreeHijackNetrw
+    au VimEnter * call ReplaceNERDTreeIfDirectory()
+augroup END
